@@ -1,5 +1,5 @@
 <configuration>
-    <property name="logfile" value="stay-motivated-back-end"/>
+    <property name="logfile" value="time-is-money-back-end"/>
     <property name="pattern" value="%date %level [%thread] %logger{10} [%file:%line] %msg%n"/>
 
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
