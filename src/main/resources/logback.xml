@@ -1,0 +1,28 @@
+<configuration>
+    <property name="logfile" value="stay-motivated-back-end"/>
+    <property name="pattern" value="%date %level [%thread] %logger{10} [%file:%line] %msg%n"/>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logfile}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logfile}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="ROLLING"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

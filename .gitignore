@@ -23,3 +23,9 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Other ###
+run.pid
+application.pid
+nohup.out
+*.log
