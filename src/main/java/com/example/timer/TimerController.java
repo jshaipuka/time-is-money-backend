@@ -3,7 +3,13 @@ package com.example.timer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.time.ZoneId;
@@ -13,15 +19,15 @@ import java.util.UUID;
 
 @RestController
 public class TimerController {
-    private TimerRepository timerRepository;
+
+    private final TimerRepository timerRepository;
 
     @Autowired
     TimerController(TimerRepository timerRepository) {
         this.timerRepository = timerRepository;
     }
 
-    @GetMapping(value = "/{token}")
-    @ResponseBody
+    @GetMapping("/{token}")
     ResponseEntity<Timer> getTimer(final @PathVariable("token") String token) {
         return this.timerRepository
                 .findById(token)
@@ -30,7 +36,6 @@ public class TimerController {
     }
 
     @PostMapping
-    @ResponseBody
     ResponseEntity<Timer> createTimer(final @RequestBody Timer timer) throws UnsupportedEncodingException {
         ZoneId timeZone = timer.getTimeZone() == null ? ZoneId.systemDefault() : ZoneId.of(timer.getTimeZone());
         ZonedDateTime now = ZonedDateTime.now(timeZone);
@@ -49,8 +54,7 @@ public class TimerController {
         return ResponseEntity.ok(newTimer);
     }
 
-    @PutMapping(value = "/{token}")
-    @ResponseBody
+    @PutMapping("/{token}")
     ResponseEntity<Timer> updateTimer(final @PathVariable("token") String token, final @RequestBody Timer timer) {
 
         return this.timerRepository
@@ -62,8 +66,7 @@ public class TimerController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping(value = "/{token}")
-    @ResponseBody
+    @DeleteMapping("/{token}")
     ResponseEntity deleteTimer(final @PathVariable("token") String token, final @RequestBody Timer timer) {
         return this.timerRepository
                 .findById(token)
