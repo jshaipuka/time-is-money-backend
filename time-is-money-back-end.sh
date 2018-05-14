@@ -12,7 +12,7 @@ case $1 in
         if [ -f ${PID_PATH_NAME} ]; then
             echo "$SERVICE_NAME is already running ..."
         else
-            nohup ${SERVICE_FOLDER}/mvnw spring-boot:run >/dev/null 2>&1 &
+            ${SERVICE_FOLDER}/mvnw spring-boot:run
             echo "$SERVICE_NAME started ..."
         fi
     ;;
@@ -35,7 +35,7 @@ case $1 in
             echo "$SERVICE_NAME stopped ...";
             rm ${PID_PATH_NAME}
             echo "$SERVICE_NAME starting ..."
-            nohup ${SERVICE_FOLDER}/mvnw spring-boot:run >/dev/null 2>&1 &
+            ${SERVICE_FOLDER}/mvnw spring-boot:run
             echo "$SERVICE_NAME started ..."
         else
             echo "$SERVICE_NAME is not running ..."
