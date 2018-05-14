@@ -4,8 +4,7 @@ export SPRING_DATA_MONGODB_HOST=91.92.128.214
 export SPRING_DATA_MONGODB_PORT=27017
 
 SERVICE_NAME=time-is-money-back-end
-SERVICE_FOLDER=/app/stay-motivated-back-end
-PATH_TO_JAR=/usr/local/MyProject/MyJar.jar
+SERVICE_FOLDER=/app/time-is-money-backend
 PID_PATH_NAME=${SERVICE_FOLDER}/application.pid
 case $1 in
     start)
