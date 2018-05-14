@@ -1,6 +1,7 @@
 #!/bin/sh
 
-./setenv.sh
+export SPRING_DATA_MONGODB_HOST=91.92.128.214
+export SPRING_DATA_MONGODB_PORT=27017
 
 SERVICE_NAME=time-is-money-back-end
 SERVICE_FOLDER=/app/stay-motivated-back-end
