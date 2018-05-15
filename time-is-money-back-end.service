@@ -1,0 +1,12 @@
+[Unit]
+Description=Java Service
+After=network.target
+
+[Service]
+Type = forking
+ExecStart=/app/time-is-money-backend/time-is-money-back-end.sh start
+ExecStop=/app/time-is-money-backend/time-is-money-back-end.sh stop
+ExecReload=/app/time-is-money-backend/time-is-money-back-end.sh restart
+
+[Install]
+WantedBy=default.target
