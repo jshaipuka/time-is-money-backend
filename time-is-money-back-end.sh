@@ -12,7 +12,7 @@ case $1 in
         if [ -f ${PID_PATH_NAME} ]; then
             echo "$SERVICE_NAME is already running ..."
         else
-            java -jar /app/time-is-money-backend/target/timer-0.0.1-SNAPSHOT.jar
+            nohup java -jar /app/time-is-money-backend/target/timer-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &
             echo "$SERVICE_NAME started ..."
         fi
     ;;
@@ -35,7 +35,7 @@ case $1 in
             echo "$SERVICE_NAME stopped ...";
             rm ${PID_PATH_NAME}
             echo "$SERVICE_NAME starting ..."
-            java -jar /app/time-is-money-backend/target/timer-0.0.1-SNAPSHOT.jar
+            nohup java -jar /app/time-is-money-backend/target/timer-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &
             echo "$SERVICE_NAME started ..."
         else
             echo "$SERVICE_NAME is not running ..."
