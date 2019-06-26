@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.UnsupportedEncodingException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @RestController
 public class TimerController {
@@ -36,14 +37,14 @@ public class TimerController {
     }
 
     @PostMapping
-    ResponseEntity<Timer> createTimer(final @RequestBody Timer timer) throws UnsupportedEncodingException {
+    ResponseEntity<Timer> createTimer(final @RequestBody Timer timer) {
         ZoneId timeZone = timer.getTimeZone() == null ? ZoneId.systemDefault() : ZoneId.of(timer.getTimeZone());
         ZonedDateTime now = ZonedDateTime.now(timeZone);
         Long expiryTime = now.plus(1, ChronoUnit.MONTHS).toInstant().toEpochMilli();
         Long startTime = now.toInstant().toEpochMilli();
 
         String source = startTime.toString() + timeZone.toString() + timer.getSalary().toString();
-        byte[] bytes = source.getBytes("UTF-8");
+        byte[] bytes = source.getBytes(UTF_8);
         UUID uuid = UUID.nameUUIDFromBytes(bytes);
         String token = uuid.toString();
 
